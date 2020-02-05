@@ -5,6 +5,7 @@ This program is written on python2.7 and excuted in Ubuntu16.04
 
 Steps to run this simulation on your system 
 - First Install **python** 
+- Install the dependency library  **numpy** and **matplotlib**
 - Open the terminal/CMD and type the following commands to get started
     - Type ```git clone https://github.com/naveenbiitk/State_Estimation.git ```
     - This will create a copy of the above code on your current folder in terminal
