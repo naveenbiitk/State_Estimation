@@ -1,0 +1,21 @@
+<launch>
+
+<node pkg="rosbag" type="play" name="player"  args="--clock /home/naveen/dwm1001/icra_vid_yaw.bag"/>
+
+<node pkg="gps_denied" type="yaw" name="yaw" output="screen">
+    
+    <param name="tag_r"             value="0.42" /> 
+    <param name="imu_q"             value="0.010" />
+    <param name="distance"          value="0.2" /> 
+    <param name="error_threshold"   value="12.7" />
+
+    <remap from="imu" to="/mavros/imu/data" />
+    <remap from="tag_1" to="/b5701/dwm1001/tagtag" />  
+    <remap from="tag_2" to="/f8726/dwm1001/tagtag" /> 
+    <remap from="velocity" to="/mavros/local_position/velocity_body" /> 
+
+</node>
+   
+
+</launch>
+

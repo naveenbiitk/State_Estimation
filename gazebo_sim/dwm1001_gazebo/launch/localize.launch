@@ -1,0 +1,12 @@
+<launch>
+
+    <!--Exctract info from dwm1001 dev boards, filter them and publish them into topics-->
+    <node pkg="dwm1001" type="dwm1001_main.py" name="dwm1001" output="screen">
+
+        <param name="serial_port_name"      value="/dev/ttyACM1" /> <!-- Name of serial port -->
+        <param name="serial_baud_rate"      value="115200" />  <!--Baudrate of serial port-->
+
+    </node>
+
+
+</launch>

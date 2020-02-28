@@ -1,0 +1,43 @@
+<launch>
+
+<arg name="bag" />
+
+<!--node pkg="dwm1001" type="dwm1001_main.py" name="dwm1001" output="screen">
+ </node-->
+
+<!--node pkg="gps_denied" type="IKalmanFilter_swarm" name="IKalmanFilter_swarm" output="screen">
+    <rosparam command="load" file="$(find gps_denied)/cfg/value.yaml"/>
+    <remap from="imu" to="/host/imu/data" />
+    <remap from="velocity" to="/host/local_position/velocity_local_" />
+    <remap from="anchor_lead" to="/dwm1001/anchor833B" />
+    <remap from="anchor_neigh" to="/dwm1001/anchor8722" />
+    <remap from="position_leader" to="/leader" />
+    <remap from="position_neighour" to="/vrpn_client_node/quad0/pose" />
+    <remap from="height" to="/vrpn_client_node/quad1/pose" />
+</node-->
+
+
+<node pkg="gps_denied" type="KalmanFilter" name="KalmanFilter" output="screen">
+    <rosparam command="load" file="$(find gps_denied)/cfg/value.yaml"/>
+    <remap from="imu" to="/mavros/imu/data" />
+    <remap from="anchor_1" to="/dwm1001/anchor5D85" />  
+    <remap from="anchor_2" to="/dwm1001/anchorD28E" /> 
+    <remap from="anchor_3" to="/dwm1001/anchor8136" /> 
+    <remap from="anchor_4" to="/dwm1001/anchor8726" /> 
+    <!--remap from="anchor_5" to="/dwm1001/anchorD28E" / -->
+    <!--remap from="anchor_6" to="/dwm1001/anchor5D85" / -->
+    <remap from="height" to="/range" />
+    <remap from="initialize" to="/dwm1001/tagtag" /> 
+    <remap from="velocity" to="/mavros/local_position/velocity_local__" />
+    <remap from="/Filtered_pose" to="/unfiltered_pose" />  
+</node>
+   
+<node name="error" type="error.py" pkg="gps_denied" output="screen" />
+
+<node pkg="rosbag" type="record" name="record" args="-a --duration=27 -O /home/naveen/rtk_bag/rtk_6_crt.bag" />
+
+<node pkg="rosbag" type="play" name="player"  args="--clock /home/naveen/rtk_bag/rtk_5_correct.bag"/>
+
+
+</launch>
+
